@@ -1,0 +1,25 @@
+{
+  "name": "send21",
+  "owner": {
+    "name": "send21",
+    "email": "info@send21.io"
+  },
+  "metadata": {
+    "description": "send21 plugin for Cursor and Grok Bot"
+  },
+  "plugins": [
+    {
+      "name": "send21",
+      "source": ".",
+      "description": "Crypto pay links and API for people and AI agents.",
+      "category": "Payments",
+      "tags": [
+        "payments",
+        "crypto",
+        "non-custodial"
+      ],
+      "logo": "assets/logo.svg",
+      "repository": "https://github.com/send21io/send21-plugin"
+    }
+  ]
+}
