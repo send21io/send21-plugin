@@ -2,7 +2,7 @@
 
 Crypto pay links and API for people and AI agents.
 
-This plugin connects your agent to the send21 MCP server (`https://send21.io/mcp`, Streamable HTTP) and adds three skills:
+This plugin connects your agent to the send21 MCP server with sign-in (`https://send21.io/mcp/oauth`, Streamable HTTP, OAuth) and adds three skills:
 
 | Skill | What it does |
 | --- | --- |
@@ -18,11 +18,54 @@ Supported: BTC (on-chain and Lightning), USDC, USDT, EURC, SOL and ETH on Bitcoi
 
 ## Setup
 
-Auth: API key or OAuth sign-in. The plugin uses an API key (below). Clients that support MCP sign-in (OAuth), such as Claude, Claude Code, Cursor, VS Code and Muse Code, can use `https://send21.io/mcp/oauth` with no headers instead: you sign in to send21 in the browser and approve the app, no key to copy. Connected apps only ever use receiving addresses the owner approved. Details: https://send21.io/docs/mcp ("Sign in instead of a key").
+Install = sign in. No key to copy.
 
-1. Sign in at https://send21.io and create a scoped API key at https://send21.io/api-keys. Pick only the scopes you need (`drafts:read`, `drafts:write`, `addressbook:read`, `addressbook:write`, `webhooks:manage`).
-2. Install the plugin and set `SEND21_API_KEY` (Plugins → Configure). The key is sent as `Authorization: Bearer s21_...`.
-3. Approve your receiving addresses in the send21 app. New accounts let API keys use approved addresses only.
+1. Install the plugin. Its `mcp.json` points at `https://send21.io/mcp/oauth` with no headers.
+2. When the client connects, it opens send21 in your browser. Sign in, check what the app asks for, and approve.
+3. Approve your receiving addresses in the send21 app (passkey or authenticator code). A connected app only ever uses receiving addresses you approved.
+
+The connection is listed under [API keys](https://send21.io/api-keys) as a connected app, where Disconnect ends it at once. A connection nobody uses for 90 days ends by itself.
+
+### Sign in from other clients
+
+Claude Code:
+
+```bash
+claude mcp add --transport http send21 https://send21.io/mcp/oauth
+# then run /mcp in Claude Code and choose send21 to sign in
+```
+
+VS Code (`.vscode/mcp.json`):
+
+```json
+{
+  "servers": {
+    "send21": {
+      "type": "http",
+      "url": "https://send21.io/mcp/oauth"
+    }
+  }
+}
+```
+
+Any MCP client that supports OAuth: add `https://send21.io/mcp/oauth` as a remote (Streamable HTTP) MCP server with no headers.
+
+### Prefer an API key?
+
+API keys still work, on `https://send21.io/mcp`. Create a scoped key at https://send21.io/api-keys with only the scopes you need (`drafts:read`, `drafts:write`, `addressbook:read`, `addressbook:write`, `webhooks:manage`); it is sent as `Authorization: Bearer s21_...`. Turn off the plugin's `send21` server and add this to `.cursor/mcp.json` or `~/.cursor/mcp.json`, with `SEND21_API_KEY` set in your environment:
+
+```json
+{
+  "mcpServers": {
+    "send21": {
+      "url": "https://send21.io/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:SEND21_API_KEY}"
+      }
+    }
+  }
+}
+```
 
 No account yet? The `create_account` tool signs the owner up with their email and returns a bootstrap key; the owner takes the account over from the emailed link. `tools/list` and `get_fee_schedule` work without a key.
 

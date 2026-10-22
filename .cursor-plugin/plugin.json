@@ -1,7 +1,7 @@
 {
   "name": "send21",
   "displayName": "send21",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Crypto pay links and API for people and AI agents. Agents prepare pay links and payment drafts over the send21 MCP server; a person signs in their own wallet. send21 never holds keys or funds.",
   "author": {
     "name": "send21",
@@ -21,20 +21,8 @@
     "lightning",
     "webhooks",
     "non-custodial",
-    "mcp"
+    "mcp",
+    "oauth"
   ],
-  "logo": "assets/logo.svg",
-  "variables": {
-    "type": "object",
-    "properties": {
-      "SEND21_API_KEY": {
-        "type": "string",
-        "title": "send21 API key",
-        "description": "Scoped key from https://send21.io/api-keys (looks like s21_...). Pick only the scopes you need: drafts:read, drafts:write, addressbook:read, addressbook:write, webhooks:manage. No key can move funds."
-      }
-    },
-    "required": [
-      "SEND21_API_KEY"
-    ]
-  }
+  "logo": "assets/logo.svg"
 }

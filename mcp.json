@@ -1,10 +1,7 @@
 {
   "mcpServers": {
     "send21": {
-      "url": "https://send21.io/mcp",
-      "headers": {
-        "Authorization": "Bearer ${SEND21_API_KEY}"
-      }
+      "url": "https://send21.io/mcp/oauth"
     }
   }
 }
