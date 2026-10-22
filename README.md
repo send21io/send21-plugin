@@ -1,6 +1,6 @@
 # send21 plugin
 
-Crypto pay links and API for people and AI agents.
+[send21](https://send21.io/): Crypto pay links and API for people and AI agents.
 
 This plugin connects your agent to the send21 MCP server with sign-in (`https://send21.io/mcp/oauth`, Streamable HTTP, OAuth) and adds three skills:
 
