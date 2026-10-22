@@ -13,7 +13,7 @@ description: Check whether a send21 pay link or payment draft has been paid, and
 
 ## Check where it stands
 
-- Pay link: call `get_payment_request` with its id. It returns the payment status.
+- Pay link: call `get_payment_request` with `paymentRequestId` (the id `create_payment_request` returned). Its `status` is `Open` (waiting for the payer), `Completed` (paid), `Cancelled` or `Expired`. Once the payer picks a currency, `activeDraftId` and `draftStatus` show the draft behind it; check that draft as below.
 - Draft: call `get_draft_status` (cheap snapshot) or `get_draft` (full detail).
 - The MCP prompt `check_payment` (argument `id`) walks through the same steps and explains the result in plain words.
 
