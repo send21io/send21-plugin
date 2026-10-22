@@ -18,6 +18,8 @@ Supported: BTC (on-chain and Lightning), USDC, USDT, EURC, SOL and ETH on Bitcoi
 
 ## Setup
 
+Auth: API key or OAuth sign-in. The plugin uses an API key (below). Clients that support MCP sign-in (OAuth), such as Claude, Claude Code, Cursor, VS Code and Muse Code, can use `https://send21.io/mcp/oauth` with no headers instead: you sign in to send21 in the browser and approve the app, no key to copy. Connected apps only ever use receiving addresses the owner approved. Details: https://send21.io/docs/mcp ("Sign in instead of a key").
+
 1. Sign in at https://send21.io and create a scoped API key at https://send21.io/api-keys. Pick only the scopes you need (`drafts:read`, `drafts:write`, `addressbook:read`, `addressbook:write`, `webhooks:manage`).
 2. Install the plugin and set `SEND21_API_KEY` (Plugins → Configure). The key is sent as `Authorization: Bearer s21_...`.
 3. Approve your receiving addresses in the send21 app. New accounts let API keys use approved addresses only.
